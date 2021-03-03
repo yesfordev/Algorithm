@@ -53,6 +53,7 @@ public class programmers_소수찾기 {
 
 	}
 
+	// 순열을 이용하여 완전 탐색!
 	private static void nPr(int cnt) {
 		if(cnt == R) {
 			numbersArr.add(Integer.parseInt(new String(perm)));
@@ -69,6 +70,7 @@ public class programmers_소수찾기 {
 		}
 	}
 
+	// 소수를 찾기. 소수는 해당 값의 루트 값까지만 체크해도 다 체크 가능함 
 	private static void checkSosu(Integer next) {
 		if(next == 1 || next == 0) return;
 		if(next == 2 || next == 3) {
