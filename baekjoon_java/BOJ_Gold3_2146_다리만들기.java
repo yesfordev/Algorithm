@@ -21,7 +21,7 @@ import java.util.StringTokenizer;
  * 
  * => queue.poll(), 조건 중요!
  */
-public class BOJ_Gold3_다리만들기 {
+public class BOJ_Gold3_2146_다리만들기 {
 
 	static int N, seomIdx, answer=Integer.MAX_VALUE;
 	static int[][] map;
