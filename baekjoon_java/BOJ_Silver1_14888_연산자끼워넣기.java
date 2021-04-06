@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  * 1. 그냥 전체적으로 탐색 해보기 
  * => N-1개의 연산자를 썼을 때, 연산은 끝난다.
  */
-public class BOJ_Silver1_연산자끼워넣기 {
+public class BOJ_Silver1_14888_연산자끼워넣기 {
 
 	static int N, max, min;
 	static int[] num;
