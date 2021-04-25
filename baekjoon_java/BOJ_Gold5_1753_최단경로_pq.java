@@ -3,14 +3,32 @@ package yes;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class BOJ_Gold5_1753_최단경로 {
+public class BOJ_Gold5_1753_최단경로_pq {
 
+	static class Vertex implements Comparable<Vertex> {
+		int to;
+		int w;
+		public Vertex(int to, int w) {
+			super();
+			this.to = to;
+			this.w = w;
+		}
+		
+		@Override
+		public int compareTo(Vertex o) {
+			return Integer.compare(this.w, o.w);
+		}
+		
+	}
 	static int V,E,startV, INF=3000001;
-	static int adjMatrix[][], distance[];
+	static int distance[];
 	static boolean visited[];
+	static ArrayList<Vertex>[] nodes;
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -20,7 +38,12 @@ public class BOJ_Gold5_1753_최단경로 {
 		E = Integer.parseInt(st.nextToken());
 		startV = Integer.parseInt(in.readLine());
 		
-		adjMatrix = new int[V+1][V+1];
+		nodes = new ArrayList[V+1];
+		
+		for (int i = 0; i <= V; i++) {
+			nodes[i] = new ArrayList<Vertex>();
+		}
+		
 		distance = new int[V+1];
 		
 		Arrays.fill(distance, INF);
@@ -31,7 +54,7 @@ public class BOJ_Gold5_1753_최단경로 {
 			int to = Integer.parseInt(st.nextToken());
 			int w = Integer.parseInt(st.nextToken());
 			
-			adjMatrix[from][to] = w;
+			nodes[from].add(new Vertex(to, w));
 		}
 		
 		dijkstra(startV);
@@ -47,28 +70,25 @@ public class BOJ_Gold5_1753_최단경로 {
 	}
 
 	private static void dijkstra(int start) {
+		PriorityQueue<Vertex> pq = new PriorityQueue<Vertex>();
 		distance[start] = 0;
-	
-		for (int i = 1; i <= V; i++) {
-			int min = Integer.MAX_VALUE;
-			int current = 0;
-			for(int j=1; j<=V; j++) {
-				if(!visited[j] && min > distance[j]) {
-					min = distance[j];
-					current = j;
-				}
-			}
+		pq.offer(new Vertex(start, 0));
+		
+		while(!pq.isEmpty()) {
+			Vertex minNode = pq.poll();
+			int current = minNode.to;
+			int minW = minNode.w;
 			
+			if(visited[current]) continue;
 			visited[current] = true;
 			
-			for (int j = 1; j <= V; j++) {
-				if(!visited[j] && adjMatrix[current][j]!=0 && distance[j] > min + adjMatrix[current][j]) {
-					distance[j] = min+adjMatrix[current][j];
+			for(Vertex node : nodes[current]) {
+				if(distance[node.to] > distance[current] + node.w) {
+					distance[node.to] = distance[current] + node.w;
+					pq.offer(new Vertex(node.to, distance[node.to]));
 				}
 			}
-			
 		}
-		
 		
 	}
 
