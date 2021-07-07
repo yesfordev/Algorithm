@@ -41,12 +41,11 @@ public class BOJ_Gold3_1941_소문난칠공주_sol {
 		
 		combination(0, 0, 0);
 		
-		System.out.println(allCnt);
-//		bw.write(allCnt + "\n");
-//		
-//		in.close();
-//		bw.flush();
-//		bw.close();
+		bw.write(allCnt + "\n");
+		
+		in.close();
+		bw.flush();
+		bw.close();
 	}
 
 	private static void combination(int idx, int start, int cntY) {
@@ -54,28 +53,9 @@ public class BOJ_Gold3_1941_소문난칠공주_sol {
 			return;
 		}
 		if(idx == 7) {
-			int arr[] = new int[] {1,2,3,4,6,11,14};
-			
-			boolean checkS = true;
-			for (int i = 0; i < 7; i++) {
-				if(arr[i] != comb[i]) {
-					checkS = false;
-					break;
-				}
-			}
-			
-			if(checkS) {
-				System.out.println("통과");
-			}
 		
 			if(checkAdj()) {
 				++allCnt;
-				if(allCnt == 3) {
-					System.out.println("hi");
-				}
-				if(allCnt == 4) {
-					System.out.println("hi");
-				}
 			}
 			return;
 		}
@@ -95,8 +75,8 @@ public class BOJ_Gold3_1941_소문난칠공주_sol {
 		settingTempStudent();
 		queue.clear();
 		
-		int r = list.get(comb[0])[0];
-		int c = list.get(comb[0])[1];
+		int r = list.get(comb[0])[0]; // 주의(인덱스)
+		int c = list.get(comb[0])[1]; // 주의
 		queue.offer(new int[] {r,c});
 		visitStudent[r][c] = true; // 이거 넣기!
 		
